@@ -36,7 +36,19 @@
                 </Style>
             </Style.Resources>
         </Style>
-        
+
+        <Style x:Key="DateInputStyle" TargetType="DatePicker">
+            <Setter Property="Margin" Value="80,25,100,0"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Background" Value="#EDEDED"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="3" />
+                </Style>
+            </Style.Resources>
+        </Style>
+
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -82,9 +94,39 @@
                         <ColumnDefinition Width="0.5*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Start Value" Grid.Column="0" VerticalAlignment="Center" Margin="0,30,0,10" FontSize="14" FontFamily="Century Gothic" Foreground="#4F4A4B"/>
-                    <TextBox Grid.Column="0" Style="{StaticResource TextInputStyle}" Margin="80,25,150,0"/>
+                    <DatePicker Grid.Column="0" Style="{StaticResource DateInputStyle}">
+                        <DatePicker.Resources>
+                            <Style TargetType="{x:Type DatePickerTextBox}">
+                                <Setter Property="Control.Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <TextBox x:Name="PART_TextBox" 
+                                                Text="{Binding Path=SelectedDate, RelativeSource={RelativeSource AncestorType={x:Type DatePicker}},StringFormat=d}"
+                                                Style="{StaticResource TextInputStyle}"
+                                                Margin="0"/>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DatePicker.Resources>
+                    </DatePicker>
                     <TextBlock Text="End Value" Grid.Column="1" VerticalAlignment="Center" Margin="0,30,0,10" FontSize="14" FontFamily="Century Gothic" Foreground="#4F4A4B"/>
-                    <TextBox Grid.Column="1" Style="{StaticResource TextInputStyle}" Margin="80,25,150,0"/>
+                    <DatePicker Grid.Column="1" Style ="{StaticResource DateInputStyle}">
+                        <DatePicker.Resources>
+                            <Style TargetType="{x:Type DatePickerTextBox}">
+                                <Setter Property="Control.Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <TextBox x:Name="PART_TextBox" 
+                                                Text="{Binding Path=SelectedDate, RelativeSource={RelativeSource AncestorType={x:Type DatePicker}},StringFormat=d}"
+                                                Style="{StaticResource TextInputStyle}"
+                                                Margin="0"/>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DatePicker.Resources>
+                    </DatePicker>
                 </Grid>
       
                 <Button  
